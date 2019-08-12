@@ -45,6 +45,11 @@ wifi.scan-rand-mac-address=no
 Otherwise, you may get stuck in an infinte loop of failed connection and a prompt for password. Source page here:
 https://wiki.debian.org/WiFi
 
+**BUILD USING DKMS**
+```bash
+sudo make -f Makefile.dkms install
+```
+
 **STATUS**  
 Driver works fine (some sort of)  
 Most of the work is done is cleaning the driver and make this mess **readable**   for conversion.

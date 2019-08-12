@@ -1917,7 +1917,9 @@ MODULE_NAME := $(USER_MODULE_NAME)
 endif
 
 ifneq ($(KERNELRELEASE),)
+endif
 
+src := $(dir $(lastword $(MAKEFILE_LIST)))
 ########### this part for *.mk ############################
 include $(src)/hal/phydm/phydm.mk
 
@@ -1991,13 +1993,12 @@ endif
 
 obj-$(CONFIG_RTL8822BU) := $(MODULE_NAME).o
 
-else
-
 export CONFIG_RTL8822BU = m
 
 all: modules
 
 modules:
+	@echo $(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) M=$(shell pwd)  modules
 	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) M=$(shell pwd)  modules
 
 strip:
@@ -2066,5 +2067,4 @@ clean:
 	rm -fr Module.symvers ; rm -fr Module.markers ; rm -fr modules.order
 	rm -fr *.mod.c *.mod *.o .*.cmd *.ko *~
 	rm -fr .tmp_versions
-endif
 
